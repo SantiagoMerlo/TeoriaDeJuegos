@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:teoria_de_juegos/src/widgets/colors.dart';
+
 
 class FosforoPage extends StatefulWidget {
   @override
@@ -17,12 +19,13 @@ class _FosforoPageState extends State<FosforoPage> {
   bool _end = false;
   int _player = 1;
   int _less = 0;
-  Color _backTurn = Colors.pink[800];
+  int _i = 0;
+  Color _backTurn = getTriada[4];
 
   double _height = 100;
   double _width = 100;
   BorderRadius _borderRadius = BorderRadius.circular(20);
-  Color _color    = Colors.orange[800];
+  Color _color    = getTriada[3];
 
 
   Widget _state;
@@ -43,7 +46,16 @@ class _FosforoPageState extends State<FosforoPage> {
       appBar: AppBar(
         title: Text('Dilema del Fosforo'),
       ),
-      body: _state,
+      body: Stack(
+        children: <Widget>[
+          Container(
+              height: double.maxFinite,
+              width: double.maxFinite,
+              child: Image(image: AssetImage('assets/back.png'),
+                fit: BoxFit.cover,)),
+          _state,
+        ],
+      ),
     );
   }
 
@@ -84,7 +96,7 @@ class _FosforoPageState extends State<FosforoPage> {
   Widget _texto(String value, double tamanio) {
     return Text(
       value,
-      style: TextStyle(fontSize: tamanio, color: Colors.black),
+      style: TextStyle(fontSize: tamanio, color: Colors.black , fontWeight: FontWeight.w400),
     );
   }
 
@@ -144,7 +156,7 @@ class _FosforoPageState extends State<FosforoPage> {
                   children: <Widget>[
                     SizedBox(height: 15),
                     Text("Juego de los Fosforos", 
-                    style: TextStyle(fontSize: 20)),
+                    style: TextStyle(fontSize: 20, )),
                     SizedBox(height: 20)
                   ],
                 ),
@@ -306,14 +318,15 @@ class _FosforoPageState extends State<FosforoPage> {
           }else{
             setState(() {
               _less = 0;
+              _i++;
               _player = _nextPlayer();
               _nMatch = resto.toDouble();
-              _backTurn = Color.fromRGBO(random.nextInt(255), random.nextInt(255), random.nextInt(255), 850);
+              _backTurn = getTriada[_i%6];
               _width = random.nextInt(300).toDouble();
               if(_width < 40) _width = 50;
               _height = random.nextInt(300).toDouble();
               if(_height < 40) _height = 50;
-              _color = Color.fromRGBO(random.nextInt(255), random.nextInt(255), random.nextInt(255), 850);
+              _color = getTriada[(_i+1)%6];
               _borderRadius = new BorderRadius.circular(random.nextInt(100).toDouble());
             });
           }
@@ -366,7 +379,7 @@ class _FosforoPageState extends State<FosforoPage> {
                     text: 'El ',
                     children: <TextSpan> [
                       TextSpan( text: 'Jugador $_player ', style: TextStyle( fontWeight: FontWeight.bold )),
-                      TextSpan( text: 'ha perdido' , style: TextStyle( color: Colors.red[700] , fontWeight: FontWeight.bold))
+                      TextSpan( text: 'ha perdido' , style: TextStyle( color: getColores[0] , fontWeight: FontWeight.bold))
                     ]
                   )),
                   SizedBox(height: 30,)

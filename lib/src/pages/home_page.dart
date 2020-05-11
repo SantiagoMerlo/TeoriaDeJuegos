@@ -22,9 +22,18 @@ class _HomePageState extends State<HomePage> {
         ),
         centerTitle: true,
       ),
-      body: Column(children: <Widget>[
-        _getTarjetas(),
-      ]),
+      body: Stack(
+        children: <Widget>[
+          Container(
+              height: double.maxFinite,
+              width: double.maxFinite,
+              child: Image(image: AssetImage('assets/back.png'),
+                fit: BoxFit.cover,)),
+          Column(children: <Widget>[
+            _getTarjetas(),
+          ]),
+        ],
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: _foo(context),
     );

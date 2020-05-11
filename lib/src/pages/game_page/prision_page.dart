@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class PrisionPage extends StatefulWidget {
-  PrisionPage({Key key}) : super(key: key);
 
   @override
   _PrisionPageState createState() => _PrisionPageState();
@@ -33,7 +32,16 @@ class _PrisionPageState extends State<PrisionPage> {
        appBar: AppBar(
          title: Text('Dilema del Prisionero')
        ),
-       body: _state,
+       body: Stack(
+         children: <Widget>[
+           Container(
+              height: double.maxFinite,
+              width: double.maxFinite,
+              child: Image(image: AssetImage('assets/back.png'),
+                fit: BoxFit.cover,)),
+           _state,
+         ],
+       ),
     );
   }
 
@@ -129,7 +137,7 @@ class _PrisionPageState extends State<PrisionPage> {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.orange[900],
+        color: Colors.orange[700],
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: <BoxShadow>[
           BoxShadow(
@@ -160,7 +168,8 @@ class _PrisionPageState extends State<PrisionPage> {
         SizedBox(height: 30),
         _case(0,'Cooperar'),
         SizedBox(height: 15),
-        _case(1, 'No Cooperar')
+        _case(1, 'No Cooperar'),
+        SizedBox(height: 30)
       ],
     );
   }

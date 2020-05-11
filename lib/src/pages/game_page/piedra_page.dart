@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:teoria_de_juegos/src/widgets/colors.dart';
 
 /*
   Si aprendo crear animaciones, en la funcion _view() se podria hacer para dar un poco de suspenso 
@@ -25,11 +26,12 @@ class _PiedraPageState extends State<PiedraPage> {
 
   bool _playing = true;
   
+  int _i = 0;
   int _scorePlayer = 0;
   int _scoreIA = 0;
   int _play;
-  Color _color = Colors.orange[800];
-  Color _backColor = Colors.pink[800];
+  Color _color = getTriada[4];
+  Color _backColor = getTriada[5];
 
 
   @override
@@ -48,7 +50,16 @@ class _PiedraPageState extends State<PiedraPage> {
         appBar: AppBar(
          title: Text('Piedra, Papel y Tijera')
         ),
-        body: _state ,
+        body: Stack(
+          children: <Widget>[
+            Container(
+              height: double.maxFinite,
+              width: double.maxFinite,
+              child: Image(image: AssetImage('assets/back.png'),
+                fit: BoxFit.cover,)),
+            _state,
+          ],
+        ) ,
         floatingActionButton: FloatingActionButton(
           heroTag: 'h0',
           child: Icon(Icons.info),
@@ -233,8 +244,9 @@ class _PiedraPageState extends State<PiedraPage> {
     return InkWell(
       onTap: () {
         setState(() {
-        _color = Color.fromRGBO(random.nextInt(255), random.nextInt(255), random.nextInt(255), 850);
-        _backColor = Color.fromRGBO(random.nextInt(255), random.nextInt(255), random.nextInt(255), 850);
+        _i++;
+        _color = getTriada[_i%5];
+        _backColor = getTriada[(_i+1)%5];
         _scorePlayer = pT;
         _scoreIA = iT;
         _playing = true;
