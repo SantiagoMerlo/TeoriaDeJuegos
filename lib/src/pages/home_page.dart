@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
           'Game Theory',
           style: TextStyle(
             fontSize: 20,
+            color: Colors.white
           ),
         ),
         centerTitle: true,
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Container(
-                color: Colors.orange[900],
+                color: Theme.of(context).primaryColor,
                 child: Column(
                   children: <Widget>[
                     FadeInImage(
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                       height: 15,
                     ),
-                    _texto(_lista[index]['description'], 12)
+                    _texto(_lista[index]['description'], 15)
                   ],
                 ),
               ),
@@ -86,10 +87,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _texto(String texto, double tamanio) {
-    return Text(
-      texto,
-      textAlign: TextAlign.center,
-      style: TextStyle(color: Colors.white, fontSize: tamanio),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Text(
+        texto,
+        textAlign: TextAlign.justify,
+        style: TextStyle(color: Colors.white, fontSize: tamanio),
+      ),
     );
   }
 

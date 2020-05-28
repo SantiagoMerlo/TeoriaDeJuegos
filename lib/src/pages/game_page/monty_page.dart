@@ -27,7 +27,7 @@ class _MontyPageState extends State<MontyPage> {
     });
 
     return Scaffold(
-      appBar: AppBar(title: Text('Monty Hall')),
+      appBar: AppBar(title: Text('Monty Hall' ,style: TextStyle(color: Colors.white),)),
       body: Stack(children: <Widget>[
         Container(
             height: double.maxFinite,
@@ -95,26 +95,14 @@ class _MontyPageState extends State<MontyPage> {
   }
 
   Widget _botton() {
-    return GestureDetector(
-      onTap: () {
+    return FloatingActionButton.extended(
+      onPressed: () {
         setState(() {
           _iPart1++;
           if(_iPart1 > 5) _action++;
         });
-      },
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          height: 50,
-          width: 200,
-          color: Theme.of(context).primaryColor,
-          child: Center(
-            child:
-                Text('Continuar', style: Theme.of(context).textTheme.subhead),
-          ),
-        ),
-      ),
-    );
+      }, label: Text("   Continuar   ", style: TextStyle(color: Colors.white),)
+      );
   }
 
   Widget _cuadroTexto(String texto) {
@@ -123,7 +111,7 @@ class _MontyPageState extends State<MontyPage> {
       child: Container(
         height: 200,
         width: 250,
-        color: Theme.of(context).secondaryHeaderColor,
+        color: Color.fromARGB(180, 135, 65, 0),
         child: Container(
           margin: EdgeInsets.symmetric(vertical: 30 , horizontal: 15),
           child: Column(
@@ -131,11 +119,16 @@ class _MontyPageState extends State<MontyPage> {
               Text(
                 texto,
                 textAlign: TextAlign.justify,
-                style: Theme.of(context).textTheme.button,
+                style: TextStyle(
+                  color:Colors.white,
+                ),
               ),
               SizedBox(height: 15),
               Center(
-                child: Text('...', style: Theme.of(context).textTheme.button))
+                child: Text('...', 
+                style: TextStyle( color: Colors.white)
+                )
+              )
             ],
           ),
         ),
@@ -174,14 +167,16 @@ class _MontyPageState extends State<MontyPage> {
                   child: Container(
                     height: 50,
                     width: 150,
-                    color: Theme.of(context).secondaryHeaderColor,
+                    color: Color.fromARGB(180, 135, 65, 0),
                     child: Column(
                         children: <Widget>[
                           SizedBox(height: 15),
                           Text(
                             'Elige una puerta!',
                             textAlign: TextAlign.justify,
-                            style: Theme.of(context).textTheme.button,
+                            style: TextStyle(
+                              color: Colors.white
+                            ),
                           ),
                           SizedBox(height: 15),
                         ],
@@ -215,7 +210,8 @@ class _MontyPageState extends State<MontyPage> {
           color: Theme.of(context).primaryColor,
           child: Center(
             child:
-                Text('Puerta ' + opc.toString(), style: Theme.of(context).textTheme.subhead),
+                Text('Puerta ' + opc.toString(),
+                style: TextStyle(color: Colors.white),),
           ),
         ),
       ),

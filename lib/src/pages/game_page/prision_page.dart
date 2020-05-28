@@ -30,7 +30,8 @@ class _PrisionPageState extends State<PrisionPage> {
     
     return Scaffold(
        appBar: AppBar(
-         title: Text('Dilema del Prisionero')
+         title: Text('Dilema del Prisionero',
+         style: TextStyle(color: Colors.white),)
        ),
        body: Stack(
          children: <Widget>[
@@ -98,21 +99,25 @@ class _PrisionPageState extends State<PrisionPage> {
                 child: Image.asset('assets/Prision/g5299.png'),
               ),
             ],
-          )
+          ),
           ),
           SizedBox(height: 20),
           _card('Acto 6',
             'La intervension',
             'Tal vez me dieron una esperanza o una condena aun mayor. El punto es que ahora tendre que decidir que hacer.',
             Image.asset('assets/Prision/g13676.png', fit: BoxFit.fill)),
-          SizedBox(height: 20),
-          FloatingActionButton(
-            child: Icon(Icons.play_arrow , size: 50), 
-            onPressed: (){
-              setState(() {
-                _mood = 5;
-              });
-            })
+          SizedBox(height: 40),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: FloatingActionButton.extended(
+              label: Text("Continuar"), 
+              onPressed: (){
+                setState(() {
+                  _mood = 5;
+                });
+              }),
+          ),
+            SizedBox(height: 40)
         ],
       ),
     );
@@ -123,36 +128,39 @@ class _PrisionPageState extends State<PrisionPage> {
       child: Column(
         children: <Widget>[
           SizedBox(height: 15),
-          Text(titulo , style: TextStyle(fontSize: 16 )),
+          Text(titulo , style: TextStyle(fontSize: 16 , color: Colors.white)),
           SizedBox(height: 5),
           Text(subtitulo , style: TextStyle( color: Colors.grey[400])),
           SizedBox(height: 15),
           container,
           Container(
             padding: EdgeInsets.symmetric(vertical: 20.0 , horizontal: 10.0),
-            child: Text(text)
+            child: Text(text , style: TextStyle(color: Colors.white),)
           )
         ],)
     );
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.orange[700],
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black45,
-            blurRadius: 10.0,
-            spreadRadius: 2.0,
-            offset: Offset(0.0, 10.0)
-          )
-        ]
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.orange[900],
+          borderRadius: BorderRadius.circular(10.0),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.black45,
+              blurRadius: 10.0,
+              spreadRadius: 2.0,
+              offset: Offset(0.0, 10.0)
+            )
+          ]
+          ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20.0),
+          child: card
+        )
         ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20.0),
-        child: card
-      )
-      );
+    );
   
   }
 
@@ -193,10 +201,10 @@ class _PrisionPageState extends State<PrisionPage> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20.0),
           child: Container(
-            color: Colors.orange[900],
+            color: Theme.of(context).accentColor,
             height: 50,
             width: 250,
-            child: Center(child: Text(text)),
+            child: Center(child: Text(text ,style: TextStyle(color: Colors.white), )),
           ),
         ),
       ),
@@ -223,7 +231,7 @@ class _PrisionPageState extends State<PrisionPage> {
       response =  _card(
               "Resultado!", 
               "No Cooperaste", 
-              "Desgraciadamente tu compañero si coopero, asi que tu tendras la mayor condena y en poco tiempo el sera libre. \nTeniendo en cuenta la teoria de juegos, esta es la pero opcion. Ya que estas haciendo tu estrategia en base al pensamiento del otro y opta por un plan el cual si sale mal, como en este caso, tienes la mayor cantidad de perdida.", 
+              "Desgraciadamente tu compañero si coopero, asi que tu tendras la mayor condena y en poco tiempo el sera libre. \nTeniendo en cuenta la teoria de juegos, esta es la peor opcion. Ya que estas haciendo tu estrategia en base al pensamiento del otro y opta por un plan el cual si sale mal, como en este caso, tienes la mayor cantidad de perdida.", 
               Image.asset('assets/Prision/g13395.png', fit: BoxFit.cover));
     } else {
       response = _card(

@@ -48,7 +48,7 @@ class _PiedraPageState extends State<PiedraPage> {
 
     return Scaffold(
         appBar: AppBar(
-         title: Text('Piedra, Papel y Tijera')
+         title: Text('Piedra, Papel y Tijera', style: TextStyle(color:Colors.white),)
         ),
         body: Stack(
           children: <Widget>[
@@ -122,7 +122,7 @@ class _PiedraPageState extends State<PiedraPage> {
                         SizedBox(height: 5),
                         Center(
                           child: Text('Score:' , 
-                            style: Theme.of(context).textTheme.headline)
+                            style: TextStyle( color: Colors.white, fontSize: 20))
                             ),
                         SizedBox(height: 5)
                       ],
@@ -132,10 +132,10 @@ class _PiedraPageState extends State<PiedraPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       _cardScore(_scorePlayer, 'Player' , context),
-                      Text('Vs.', style: Theme.of(context).textTheme.subtitle),
+                      Text('Vs.', style: TextStyle(color:Colors.white)),
                       _cardScore(_scoreIA , 'IA' , context)
                     ],
-                  )
+                  ),
               ],
             )
           ),
@@ -157,14 +157,15 @@ class _PiedraPageState extends State<PiedraPage> {
             child: Center(
               child: Text(n.toString(),
                 style: TextStyle(
-                fontSize: 20
+                fontSize: 20,
+                color: Colors.white
               ),
             ),
           ),
         ),
       ),
       Container(
-        child: Text(player , style: Theme.of(context).textTheme.subtitle),
+        child: Text(player , style: TextStyle( color: Colors.white))
         ), 
       ]
     );
@@ -199,6 +200,23 @@ class _PiedraPageState extends State<PiedraPage> {
             width: size,
             child: image)
           );
+  }
+   Widget _itemOnly1(String address, double size){
+
+    final image = Image.asset(address);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+      child: Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+            elevation: 15,
+            color: _color,
+            child: Container(
+              height: size+10,
+              width: size,
+              child: image)
+            ),
+    );
   }
 
   Widget _view(){
@@ -253,11 +271,11 @@ class _PiedraPageState extends State<PiedraPage> {
         });
       },
       child: Container(
-        child: Column(
+        child: ListView(
           children: <Widget>[
-            _itemOnly(map[numIA], 200),
+            _itemOnly1(map[numIA], 200),
             SizedBox(height: 30),
-            _itemOnly(map[_play] , 200),
+            _itemOnly1(map[_play] , 200),
             SizedBox(height: 15),
             Container(
               width: double.maxFinite,
@@ -266,7 +284,8 @@ class _PiedraPageState extends State<PiedraPage> {
               child: Center(
                 child: Text(r , 
                   style: TextStyle(
-                    fontSize: 20
+                    fontSize: 20,
+                    color: Colors.white
                   )),
               ),
               )

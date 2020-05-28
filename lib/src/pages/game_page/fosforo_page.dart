@@ -44,7 +44,7 @@ class _FosforoPageState extends State<FosforoPage> {
     return Scaffold(
       //backgroundColor: Colors.amber,
       appBar: AppBar(
-        title: Text('Dilema del Fosforo'),
+        title: Text('Dilema del Fósforo' , style: TextStyle(color: Colors.white),),
       ),
       body: Stack(
         children: <Widget>[
@@ -156,7 +156,7 @@ class _FosforoPageState extends State<FosforoPage> {
                   children: <Widget>[
                     SizedBox(height: 15),
                     Text("Juego de los Fosforos", 
-                    style: TextStyle(fontSize: 20, )),
+                    style: TextStyle(fontSize: 20, color: Colors.white)),
                     SizedBox(height: 20)
                   ],
                 ),
@@ -227,6 +227,7 @@ class _FosforoPageState extends State<FosforoPage> {
            textAlign: TextAlign.center,
            style: TextStyle(
              fontSize: 50,
+             color: Colors.white
            ),),
       ]
     );
@@ -245,7 +246,8 @@ class _FosforoPageState extends State<FosforoPage> {
               child: Text('Turno del jugador $_player',
                 style: TextStyle(
                   fontSize: 30,
-                  fontWeight: FontWeight.bold
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white
                   ),
                   )
             ),
@@ -279,7 +281,8 @@ class _FosforoPageState extends State<FosforoPage> {
           child: Center(
             child: Text(_less.toString(),
             style: TextStyle(
-              fontSize: 20
+              fontSize: 20,
+              color: Colors.white
             ),
       ),
           ),
@@ -326,7 +329,7 @@ class _FosforoPageState extends State<FosforoPage> {
               if(_width < 40) _width = 50;
               _height = random.nextInt(300).toDouble();
               if(_height < 40) _height = 50;
-              _color = getTriada[(_i+1)%6];
+              _color = getTriada[(_i+1)%getTriada.length];
               _borderRadius = new BorderRadius.circular(random.nextInt(100).toDouble());
             });
           }

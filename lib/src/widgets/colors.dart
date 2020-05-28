@@ -7,12 +7,14 @@ List<Color> getColores = [
   ];
 
 List<Color> getTriada = [
-  Color.fromRGBO(20, 11, 0, 50),
+  Color.fromRGBO(204, 85, 0, 80),
   Color.fromRGBO(255, 153, 0, 100),
   Color.fromRGBO(140, 25, 255, 100),
-  Color.fromRGBO(94, 9, 179, 70),
+  Color.fromRGBO(0, 117, 128, 70),
   Color.fromRGBO(179, 114, 18, 70),
-  Color.fromRGBO(25, 255, 0, 100)
+  Color.fromRGBO(25, 128, 80, 100),
+  Color.fromRGBO(94, 90, 179, 70),
+  Color.fromRGBO(0, 187, 204, 80),
   ];
 
 
