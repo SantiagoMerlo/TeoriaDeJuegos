@@ -60,22 +60,22 @@ class _PrisionPageState extends State<PrisionPage> {
           _card('Acto 1',
             'La planificacion',
             'Durante mucho tiempo estuvimos planificando como desarrollariamos el plan. Ambos sabemos cada centimetro de esta maravilloza estrategia.',
-            Image.asset('assets/Prision/robo.jpg', fit: BoxFit.fill,)),
+            Image.asset('assets/Prision/robo.jpg', fit: BoxFit.cover,)),
           SizedBox(height: 20),
           _card('Acto 2',
             'La incursion',
             'Entrar al banco no iba a ser realmente un problema, no le tememos a la policia ya que no escaparemos por la puerta principal.',
-            Image.asset('assets/Prision/robo.jpg', fit: BoxFit.fill,)),
+            Image.asset('assets/Prision/robo.jpg', fit: BoxFit.cover,)),
           SizedBox(height: 20),
           _card('Acto 3',
             'El robo',
             'Tal vez es lo mas cliche que hay. Sin embargo, justo vivo al lado asi que no iba a ser tan dificil cabar un poco y escaparnos por la verdadera ruta de escape que hicimos en mi casa.',
-            Image.asset('assets/Prision/robo.jpg', fit: BoxFit.fill,)),
+            Image.asset('assets/Prision/robo.jpg', fit: BoxFit.cover,)),
           SizedBox(height: 20),
           _card('Acto 4',
             'El escape',
             'Despistar a la policia iba a ser el mayor de los problemas, pero con un plan simple de hacerlos creer que seguiamos adentro era la mejor solucion.',
-            Image.asset('assets/Prision/robo.jpg', fit: BoxFit.fill)),
+            Image.asset('assets/Prision/robo.jpg', fit: BoxFit.cover)),
           SizedBox(height: 20),
           _card('Acto 5',
             'La desgracia',
@@ -105,7 +105,7 @@ class _PrisionPageState extends State<PrisionPage> {
           _card('Acto 6',
             'La intervension',
             'Tal vez me dieron una esperanza o una condena aun mayor. El punto es que ahora tendre que decidir que hacer.',
-            Image.asset('assets/Prision/g13676.png', fit: BoxFit.fill)),
+            Image.asset('assets/Prision/g13676.png', fit: BoxFit.cover)),
           SizedBox(height: 40),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -248,7 +248,7 @@ class _PrisionPageState extends State<PrisionPage> {
       FloatingActionButton(
             child: Icon(Icons.home , size: 40), 
             onPressed: (){
-                Navigator.pushNamed(context, '/');
+                Navigator.pop(context);
               }
             )
     ]);

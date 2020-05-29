@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
               width: double.maxFinite,
               child: Image(image: AssetImage('assets/back.png'),
                 fit: BoxFit.cover,)),
-          Column(children: <Widget>[
+          ListView(children: <Widget>[
             _getTarjetas(),
           ]),
         ],
@@ -54,10 +54,9 @@ class _HomePageState extends State<HomePage> {
                 color: Theme.of(context).primaryColor,
                 child: Column(
                   children: <Widget>[
-                    FadeInImage(
-                      placeholder: AssetImage('assets/loading.gif'),
-                      image: NetworkImage(_lista[index]['url']),
-                      fit: BoxFit.cover,
+                    Container(
+                      child: Image.asset(_lista[index]['url'],
+                        fit: BoxFit.cover),
                     ),
                     SizedBox(
                       height: 10,
@@ -75,7 +74,7 @@ class _HomePageState extends State<HomePage> {
         },
         itemCount: _lista.length,
         itemWidth: _screemSize.width * 0.8,
-        itemHeight: _screemSize.height * 0.65,
+        itemHeight: _screemSize.height * 0.65  ,
         layout: SwiperLayout.STACK,
       );
 
@@ -91,7 +90,7 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Text(
         texto,
-        textAlign: TextAlign.justify,
+        textAlign: TextAlign.center,
         style: TextStyle(color: Colors.white, fontSize: tamanio),
       ),
     );
@@ -107,14 +106,7 @@ class _HomePageState extends State<HomePage> {
             heroTag: 'btn1',
             onPressed: () => Navigator.pushNamed(context, '/info'),
             child: Icon(Icons.info_outline)),
-        Expanded(child: SizedBox()),
-        FloatingActionButton(
-            heroTag: 'btn2',
-            onPressed: () => Navigator.pushNamed(context, '/calcu'),
-            child: Icon(Icons.casino)),
-        SizedBox(
-          width: 15,
-        )
+        Expanded(child: SizedBox())
       ],
     );
   }

@@ -1,4 +1,4 @@
-package com.example.teoria_de_juegos
+package com.merlo_santiago_agustin.teoria_de_juegos
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class MontyPage extends StatefulWidget {
   @override
@@ -6,10 +7,15 @@ class MontyPage extends StatefulWidget {
 }
 
 class _MontyPageState extends State<MontyPage> {
+
+  int _puertaR; // puerta ganadora
+  int _puertaC; //puerta elegida
+  int aux; //puerta abierta
   Widget _state;
   int _action = 0;
   String _dirImage = 'assets/Game/';
   int _iPart1 = 0;
+  final random = Random();
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +124,7 @@ class _MontyPageState extends State<MontyPage> {
             children: <Widget>[
               Text(
                 texto,
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color:Colors.white,
                 ),
@@ -138,68 +144,36 @@ class _MontyPageState extends State<MontyPage> {
 
 // elegir primera opcion
   Widget _part2() {
+    
+    setState(() {
+      _puertaR = random.nextInt(3) + 1;
+    });
+    
+
+
+
     return Column(
       children: <Widget>[
         SizedBox(height: 50),
-        Stack(
-          children: <Widget>[
-            Container(
-              width: double.maxFinite,
-              height: 150,
-              child: Image(
-                image: AssetImage('assets/Game/3doorGroup.png'),
-                fit: BoxFit.cover,
-              )
-            ),
-            Container(
-              padding: EdgeInsets.only(top:100,left: 200),
-              width: 350,
-              height: 300,
-              child: Image(
-                  image: AssetImage('assets/Game/presenterTable.png'),
-                  fit: BoxFit.cover,
-               ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top:225, left: 20),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                  child: Container(
-                    height: 50,
-                    width: 150,
-                    color: Color.fromARGB(180, 135, 65, 0),
-                    child: Column(
-                        children: <Widget>[
-                          SizedBox(height: 15),
-                          Text(
-                            'Elige una puerta!',
-                            textAlign: TextAlign.justify,
-                            style: TextStyle(
-                              color: Colors.white
-                            ),
-                          ),
-                          SizedBox(height: 15),
-                        ],
-                    ),
-                  ),
-                ),
-              )
-          ],
-        ),
+        ViewPresenter(image: 'assets/Game/fasfa.png', text: "Elige una puerta!"),
         SizedBox(height: 50),
-        _bottonOpcion(1, 50 , 300),
+        _bottonOpcion(1, 50 , 300 , "Puerta 1"),
         SizedBox(height: 15),
-        _bottonOpcion(2 , 50 , 300),
+        _bottonOpcion(2 , 50 , 300, "Puerta 2"),
         SizedBox(height:15),
-        _bottonOpcion(3 , 50 , 300),
+        _bottonOpcion(3 , 50 , 300, "Puerta 3"),
         SizedBox(height: 15)
       ],
     );
   }
-  Widget _bottonOpcion(int opc, double height, double width){
+  
+  Widget _bottonOpcion(int opc, double height, double width, String texto){
+
     return GestureDetector(
       onTap: () {
         setState(() {
+          _puertaC = opc;
+          _action++;
         });
       },
       child: ClipRRect(
@@ -210,7 +184,7 @@ class _MontyPageState extends State<MontyPage> {
           color: Theme.of(context).primaryColor,
           child: Center(
             child:
-                Text('Puerta ' + opc.toString(),
+                Text(texto,
                 style: TextStyle(color: Colors.white),),
           ),
         ),
@@ -220,16 +194,212 @@ class _MontyPageState extends State<MontyPage> {
 
 // texto de apertura
   Widget _part3() {
-    return Container();
+    return Column(
+      children: <Widget>[
+        SizedBox(height: 50),
+        ViewPresenter(
+          image: 'assets/Game/fasfa.png', 
+          text: "Conservas la puerta,\nSi habro otra?",),
+        SizedBox(height: 20,),
+        FloatingActionButton.extended(
+          onPressed: (){
+            setState(() {
+              _action++;
+            });
+          }, 
+          label: Text("    Continuar    ", style: TextStyle(color: Colors.white),))
+      ],
+    );
   }
 
 // eleccion nuevamente
   Widget _part4() {
-    return Container();
+
+    String image;
+    setState(() {
+    switch(_puertaC){
+      case 1:
+        if(_puertaR == _puertaC)
+          aux = random.nextInt(2)+2;
+        else if(_puertaR==2)
+          aux = 3;
+        else
+          aux = 2;
+        break;
+      case 2:
+        if(_puertaR == 1)
+          aux = 3;
+        else if(_puertaR==_puertaC)
+          aux = 1;
+        else
+          aux = 3; 
+        break;
+      case 3:
+        if(_puertaR==_puertaC)
+          aux = random.nextInt(1)+1;
+        else if(_puertaR==2)
+          aux = 1;
+        else
+          aux = 2;
+    }
+
+    if(aux == 1)
+      image = "[-][][]";
+    else if ( aux == 2)
+      image = "[][-][]";
+    else
+      image = "[][][-]";
+    
+    image += ".png";    
+    });
+
+    
+    return Column(
+      children: <Widget>[
+        SizedBox(height: 50),
+        ViewPresenter(image: 'assets/Game/$image', text: "Que prefieres?",),
+        SizedBox(height: 50),
+        _bottonOpcion(1, 50 , 300 , "Cambiar Puerta"),
+        SizedBox(height: 15),
+        _bottonOpcion( _puertaC , 50 , 300, "Conservar Puerta $_puertaC"),
+        SizedBox(height:15),
+      ],
+    );
   }
 
 // resultado
   Widget _part5() {
-    return Container();
+
+    String image;
+    String resultado;
+
+    switch(aux){
+      case 1:
+        if(_puertaR == _puertaC && _puertaC == 2 ){
+          image = "[-][*][]";
+          resultado = "Muy bien logrado!\nHas ganado!";
+        }
+        else if(_puertaR == _puertaC && _puertaC == 3){
+            image = "[-][][*]";
+            resultado = "Muy bien logrado!\nHas ganado!";
+          }
+        else if(_puertaC == 2){
+          image = "[-][-][]";
+        }
+        else{
+          image = "[-][][-]";
+        }
+        break;
+      case 2:
+        if(_puertaR == _puertaC && _puertaC == 1 ){
+          image = "[*][-][]";
+          resultado = "Muy bien logrado!\nHas ganado!";
+          }
+        else if(_puertaR == _puertaC && _puertaC == 3){
+          image = "[][-][*]";
+          resultado = "Muy bien logrado!\nHas ganado!";
+          }
+        else if(_puertaC == 1){
+            image = "[-][-][]";
+            resultado = "Uhh una lastima!\nSera la proxima!";
+          }
+        else{
+          image = "[][-][-]";
+          resultado = "Uhh una lastima!\nSera la proxima!";
+          }
+        break;
+      case 3:
+        if(_puertaR == _puertaC && _puertaC == 1 ){
+            image = "[*][][-]";
+            resultado = "Muy bien logrado!\nHas ganado!";
+          }
+        else if(_puertaR == _puertaC && _puertaC == 2){
+          image = "[][*][-]";
+          resultado = "Muy bien logrado!\nHas ganado!";
+          }
+        else if(_puertaC == 2){
+          image = "[][-][-]";
+          resultado = "Uhh una lastima!\nSera la proxima!";
+        }
+        else{
+          image = "[-][][-]";
+          resultado = "Uhh una lastima!\nSera la proxima!";
+        }
+        break;
+    }
+    
+    image += ".png";
+
+    
+    return Column(
+      children: <Widget>[
+        SizedBox(height: 50),
+        ViewPresenter(image: 'assets/Game/$image', text: resultado,),
+        SizedBox(height: 50),
+        FloatingActionButton.extended(
+          onPressed: (){
+            Navigator.pop(context);
+          }, 
+          label: Text("    Volver al Menu    ", style: TextStyle(color: Colors.white),))
+      ],
+    );
+  }
+}
+
+class ViewPresenter extends StatelessWidget {
+  const ViewPresenter({
+    Key key,
+    @required this.image,
+    @required this.text,
+  }) : super(key: key);
+
+  final String image;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        Container(
+          width: double.maxFinite,
+          height: 150,
+          child: Image(
+            image: AssetImage(this.image),
+            fit: BoxFit.cover,
+          )
+        ),
+        Container(
+          padding: EdgeInsets.only(top:100,left: 200),
+          width: 350,
+          height: 300,
+          child: Image(
+              image: AssetImage('assets/Game/presenterTable.png'),
+              fit: BoxFit.cover,
+           ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top:225, left: 20),
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  color: Color.fromRGBO(180, 135, 65, 100),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Text(
+                            text,
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                              color: Colors.white
+                            ),
+                          ),
+                  ),
+                ),
+              ),
+          ),
+          )
+      ],
+    );
   }
 }
